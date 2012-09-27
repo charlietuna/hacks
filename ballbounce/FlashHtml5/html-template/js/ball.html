@@ -1,0 +1,77 @@
+<html>
+<head>
+
+<style type="text/css">
+
+	#frameRate
+	{
+		position: absolute;
+		right: 10px;
+		bottom: 10px;
+		z-index: 100;
+		font-size: 25px;
+		font-family: Arial, Helvetica, sans-serif;
+	}
+
+</style>
+
+<script>
+var FRAME_TIMES = [];
+var x = 250;
+var y = 250;
+var vspeed = 0;
+var ctx;
+
+function load()
+{
+	canvas = document.getElementById('canvas');
+	ctx = canvas.getContext("2d");
+	setInterval("ballLoop()",16);
+}
+
+function ballLoop()
+{
+	if ((y==500-32-20)) {
+		vspeed = -10;
+	}
+	y = y+vspeed;
+	
+	if (y<500-32-20) {
+		vspeed = vspeed + .5;
+	}else{
+		vspeed = 0;
+	}
+	
+	if (y>500-32-20) {
+		y=500-32-20;
+
+	}
+	//if (canvas.getContext) {
+		ctx.clearRect(0, 0, 500, 600)
+		ctx.fillStyle = 'rgb(255,255,255)';
+		ctx.fillRect (0, 0, 500, 500);
+		ctx.fillStyle = 'rgb(0,0,0)';
+		ctx.beginPath();
+		ctx.arc(x, y, 20, 0, Math.PI * 2, true);
+		ctx.fill();
+		ctx.fillStyle = 'rgb(128,255,128)';
+		ctx.fillRect (0, 500-32, 500, 32);
+	//}
+}
+</script>
+
+</head>
+<body onLoad="load();">
+
+<style> div#cdiv { border: 1px dotted #bbb; width: 500px; }</style>
+
+<div id="cdiv">
+   <canvas id="canvas" width="500" height="500">
+     <p>YOU YOU ARE NOT USING A BROWSER THAT SUPPORTS THE
+     <a href="http://www.w3.org/html/wg/html5/">HTML5</a>
+
+     &lt;canvas&gt; FEATURE.</p>
+   </canvas>
+</div>
+</body>
+</html>
